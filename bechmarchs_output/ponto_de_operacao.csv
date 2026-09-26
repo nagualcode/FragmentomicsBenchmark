@@ -1,0 +1,17 @@
+Braco,Especificidade,Sensibilidade
+Cobertura DELFI 5 Mb (MLP),1.0,0.6111111111111112
+Cobertura DELFI 5 Mb (Logística),1.0,0.35555555555555557
+Histograma de Comprimentos (Logística),0.96875,0.1
+Caduceus + Comprimento (Projeção → Atenção MIL),1.0,0.05555555555555555
+Caduceus + Comprimento (Média → Projeção → MLP),1.0,0.05555555555555555
+Somente Comprimento (Atenção MIL) [controle nulo],1.0,0.05555555555555555
+Caduceus + Comprimento (Projeção → Média → MLP),1.0,0.044444444444444446
+Caduceus + Comprimento (Média → Logística),1.0,0.044444444444444446
+Caduceus + Comprimento (Média → MLP),1.0,0.044444444444444446
+4-mers + Comprimento (Projeção → Média → MLP),1.0,0.03333333333333333
+Caduceus (Média → Logística),1.0,0.03333333333333333
+"Caduceus + Comprimento (Média → Logística, escala de fragmento)",1.0,0.03333333333333333
+4-mers + Comprimento (Média → Projeção → MLP),1.0,0.03333333333333333
+4-mers + Comprimento (Projeção → Atenção MIL),1.0,0.03333333333333333
+Caduceus — Resíduo após 4-mers e Ocupação (Logística),1.0,0.011111111111111112
+Composição de 4-mers (Média → Logística),1.0,0.0

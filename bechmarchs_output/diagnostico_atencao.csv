@@ -1,0 +1,4 @@
+Braco,N_efetivo,Fracao_da_bolsa,Correlacao_com_comprimento
+Caduceus + Comprimento (Projeção → Atenção MIL),4781.8720703125,0.9563744140625,0.14551080480664885
+4-mers + Comprimento (Projeção → Atenção MIL),4802.66064453125,0.96053212890625,0.0595347469646497
+Somente Comprimento (Atenção MIL) [controle nulo],4224.5107421875,0.8449021484375,0.8098771098352527

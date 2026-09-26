@@ -1,0 +1,236 @@
+{
+  "assinatura_configuracao": "404e0e2f7ea254e9",
+  "assinatura_codigo": "886c52e378d78dac",
+  "assinatura_dados": "897ce5eae3e362d8",
+  "arquivos": {
+    "metadata.csv": "f5532baebd0e0c8feb42d7d2c14e497bdb0bd85101b71c0af1c4ec3134dc4479",
+    "caduceus_embeddings.npy": "7bb5ff4531180a9a71d3e92fc686d106e8cf7826d83bebb524eb61dd77b26c77",
+    "delfi_all.npy": "205e99a226def682befdcc9c7bec936440c1f5930c84a69b607ee1cd7f2946ef",
+    "kmer_features.npy": "5b4a985d6e7d095ebf1b7d3b8126d5fb094acaceb23d680fa239aeb92e2161b3",
+    "promoter_fragment_lengths.npy": "142d0b45f1bfd1ffaf738d4eea4e801a8d082c6613125469875191e40fa88f36",
+    "promoter_ids.npy": "e11f3b45d9de9420e2cd7e0fd7dd47d13ba989f8992d6e4ce56e056e56fe2674"
+  },
+  "configuracao": {
+    "SEMENTES": "(1807, 2024, 3141, 5926, 8979)",
+    "N_FRAGMENTOS": "5000",
+    "N_DOBRAS": "5",
+    "FRACAO_PARADA": "0.15",
+    "MAX_EPOCAS": "80",
+    "MIN_EPOCAS": "12",
+    "PACIENCIA": "10",
+    "JANELA_SUAVIZACAO": "5",
+    "TAXA_APRENDIZADO": "0.0003",
+    "DECAIMENTO_PESO": "0.0001",
+    "TAMANHO_LOTE": "16",
+    "DIM_OCULTA": "128",
+    "CLIP_GRADIENTE": "5.0",
+    "LIMIAR_PARADA": "0.6",
+    "PADRONIZA_BOLSA": "True",
+    "BOLSAS_NA_GPU": "True",
+    "N_COMPONENTES_OCUP": "64",
+    "COMPRIMENTO_MIN_HIST": "60",
+    "COMPRIMENTO_MAX_HIST": "420",
+    "FRACAO_MAX_FORA_HIST": "0.01",
+    "N_PERMUTACOES": "200",
+    "N_BOOTSTRAP": "2000",
+    "N_BOOTSTRAP_VARIANCIA": "400",
+    "K_COMPONENTES_PCA": "(1, 2, 5, 10, 25)",
+    "ESPECIFICIDADE_ALVO": "0.95",
+    "R2_ABORTA_RESIDUO": "0.05",
+    "R2_INTERPRETA_RESIDUO": "0.3",
+    "N_PACIENTES_FORENSE": "60",
+    "N_PACIENTES_FINITUDE": "30",
+    "N_PACIENTES_POR_CLASSE_D": "60",
+    "JANELA_EXTRA_ENCODER": "12.0",
+    "VERIFICACOES_EXTRA": "False"
+  },
+  "mapa_condicao": {
+    "healthy": 0,
+    "cirrhosis": 0,
+    "hepatitis_b": 0,
+    "bile_duct_cancer": 1,
+    "breast_cancer": 1,
+    "colorectal_cancer": 1,
+    "duodenal_cancer": 1,
+    "gastric_cancer": 1,
+    "lung_cancer": 1,
+    "ovarian_cancer": 1,
+    "pancreatic_cancer": 1,
+    "liver_cancer": 1
+  },
+  "tarefa_interna": "pan-cancer vs saudavel (Baltimore)",
+  "tarefa_externa": "carcinoma hepatocelular vs saudavel (Hong Kong)",
+  "tarefas_identicas": false,
+  "coorte_externa": "EXPLORATORIA_NAO_HOMOLOGA",
+  "forense_restrita_ao_desenvolvimento": true,
+  "n_pacientes": 762,
+  "n_desenvolvimento": 537,
+  "n_externo": 225,
+  "n_bracos": 16,
+  "gate_padding": 0,
+  "gate_vetor_identico": {
+    "caduceus": 2.7902424335479736e-06,
+    "kmers": 3.7997961044311523e-07
+  },
+  "gate_comutacao_linear_media": 2.9802322387695312e-08,
+  "gate_canal_nulo": 0.9257417917251587,
+  "gate_telescopio": 1.3877787807814457e-17,
+  "gate_finitude": "completa: DELFI, comprimentos; triagem: Caduceus, 4-mers",
+  "fracao_fora_histograma": 0.0,
+  "esparsidade_ocupacao": 0.883695807587842,
+  "crossover_variancia": 674.7622680664062,
+  "crossover_variancia_ic95": [
+    508.9107330322266,
+    1012.3639526367186
+  ],
+  "crossover_por_representacao": {
+    "Caduceus": 674.7622680664062,
+    "4-mers": 1970.6512451171875
+  },
+  "d_cohen_n_por_classe": 60,
+  "d_cohen_fragmento": 0.010396750643849373,
+  "d_cohen_paciente": 0.20307433605194092,
+  "r2_reconstrucao": 0.9902348116922862,
+  "r2_so_kmers": 0.9903630183872444,
+  "r2_so_ocupacao": 0.2455601875340082,
+  "r2_so_ocupacao_padronizada": null,
+  "residuo_computavel": true,
+  "residuo_interpretavel": true,
+  "nulo_percentil95_residuo": 0.5420153959379926,
+  "nulo_percentil95_caduceus": null,
+  "p_empirico_residuo": 0.004975124378109453,
+  "p_empirico_ic_monte_carlo": [
+    0.0,
+    0.018275340355136237
+  ],
+  "ganho_encoder_sobre_kmers": 0.09760554705128882,
+  "ganho_encoder_ic95": [
+    0.05440065405972366,
+    0.14265620473013027
+  ],
+  "limiar_parada": 0.6,
+  "inflacao_pico_bruto_sobre_suave": 0.014127384960718315,
+  "execucoes_abaixo_do_limiar": 17,
+  "comparacoes_afetadas_pelo_limiar": 12,
+  "taxa_maxima_recorte": 0.027147401908801695,
+  "avisos_convergencia": 0,
+  "degraus": {
+    "COMPRIMENTO": {
+      "delta_por_dobra": 0.0046015022713135735,
+      "dp_sementes": 0.0016592829015270461,
+      "delta_escore_agrupado": 0.004663282067306881,
+      "ic95_bootstrap": [
+        5.5539549600719385e-05,
+        0.009309761069218046
+      ],
+      "negativos": 1,
+      "de": 25,
+      "delta_atingiram": 0.004601502271313582,
+      "n_atingiram": 25
+    },
+    "NORMALIZAÇÃO": {
+      "delta_por_dobra": -0.05948023674438763,
+      "dp_sementes": 0.006552073888363726,
+      "delta_escore_agrupado": -0.06545014939486819,
+      "ic95_bootstrap": [
+        -0.09717180608609002,
+        -0.03412448798887049
+      ],
+      "negativos": 22,
+      "de": 25,
+      "delta_atingiram": -0.05948023674438769,
+      "n_atingiram": 25
+    },
+    "CABEÇA": {
+      "delta_por_dobra": 0.07946381919966825,
+      "dp_sementes": 0.007224995381539693,
+      "delta_escore_agrupado": 0.08126971856666315,
+      "ic95_bootstrap": [
+        0.05471783859152685,
+        0.1085839938812405
+      ],
+      "negativos": 0,
+      "de": 25,
+      "delta_atingiram": 0.07946381919966829,
+      "n_atingiram": 25
+    },
+    "PROJEÇÃO": {
+      "delta_por_dobra": 0.0025059421710364794,
+      "dp_sementes": 0.003615338656742328,
+      "delta_escore_agrupado": 0.007657183903934024,
+      "ic95_bootstrap": [
+        0.0014406733446017672,
+        0.01449655168304422
+      ],
+      "negativos": 10,
+      "de": 25,
+      "delta_atingiram": 0.002505942171036475,
+      "n_atingiram": 25
+    },
+    "ORDEM": {
+      "delta_por_dobra": -0.1560512883343072,
+      "dp_sementes": 0.032589412493449384,
+      "delta_escore_agrupado": -0.12909887749286197,
+      "ic95_bootstrap": [
+        -0.16417416849009142,
+        -0.0966826542461906
+      ],
+      "negativos": 25,
+      "de": 25,
+      "delta_atingiram": -0.1291657200793248,
+      "n_atingiram": 19
+    },
+    "AGREGADOR": {
+      "delta_por_dobra": 0.02395991272878071,
+      "dp_sementes": 0.02228920903024271,
+      "delta_escore_agrupado": -0.05005125871102332,
+      "ic95_bootstrap": [
+        -0.0957627959089558,
+        -0.0031643664021926664
+      ],
+      "negativos": 10,
+      "de": 25,
+      "delta_atingiram": 0.017915010758853864,
+      "n_atingiram": 19
+    }
+  },
+  "replicacao": {
+    "ORDEM": {
+      "caduceus": -0.1560512883343072,
+      "kmers": -0.11740555670744353,
+      "kmers_ic95": [
+        -0.11319947689158746,
+        -0.049121257146400615
+      ]
+    },
+    "AGREGADOR": {
+      "caduceus": 0.02395991272878071,
+      "kmers": 0.00333868018773682,
+      "kmers_ic95": [
+        -0.15385989298561958,
+        -0.06493019322196439
+      ]
+    }
+  },
+  "concordancia_entre_replicas": {
+    "Caduceus (Média → Logística)": 0.9353408757338931,
+    "Caduceus + Comprimento (Média → Logística)": 0.9372544067682602,
+    "Composição de 4-mers (Média → Logística)": 0.7392776904867367,
+    "Histograma de Comprimentos (Logística)": 0.9347845722892256,
+    "Cobertura DELFI 5 Mb (Logística)": 0.8159181364104894,
+    "Caduceus + Comprimento (Média → Logística, escala de fragmento)": 0.9723043600092618,
+    "Caduceus + Comprimento (Projeção → Atenção MIL)": 0.17825832589555698,
+    "Caduceus + Comprimento (Projeção → Média → MLP)": 0.19487114567962668,
+    "Caduceus + Comprimento (Média → Projeção → MLP)": 0.9247262421046724,
+    "Caduceus + Comprimento (Média → MLP)": 0.9586439440975016,
+    "4-mers + Comprimento (Projeção → Atenção MIL)": 0.19690940688373523,
+    "4-mers + Comprimento (Projeção → Média → MLP)": 0.24373777230124688,
+    "4-mers + Comprimento (Média → Projeção → MLP)": 0.8384626786253266,
+    "Somente Comprimento (Atenção MIL) [controle nulo]": 0.6149034515678655,
+    "Cobertura DELFI 5 Mb (MLP)": 0.7898937045508905,
+    "Caduceus — Resíduo após 4-mers e Ocupação (Logística)": 0.658182514769303
+  },
+  "dimensao_figura4": 17,
+  "verificacoes_extra": false,
+  "tempo_total_segundos": 1813.1
+}
