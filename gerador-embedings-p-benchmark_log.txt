@@ -1,0 +1,173 @@
+6.3s 1 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+6.3s 2 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+6.3s 3 0.00s - to python to disable frozen modules.
+6.3s 4 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+6.9s 5 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+6.9s 6 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+6.9s 7 0.00s - to python to disable frozen modules.
+6.9s 8 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+8.3s 9 
+8.3s 10 ==========================================================================================
+8.3s 11 BEGIN CELL 00 — CABECALHO, CONFIGURACAO E DIRETORIOS
+8.3s 12 ==========================================================================================
+8.3s 13 Protocol hash    : d7761ac06840461a…
+8.3s 14 Notebook revision: 3.1.0
+8.3s 15 Working dir      : /kaggle/working/caduceus_promoter_mil_v3
+8.3s 16 Run stage        : ALL
+8.3s 17 ==========================================================================================
+8.3s 18 END CELL 00 — CABECALHO, CONFIGURACAO E DIRETORIOS
+8.3s 19 ==========================================================================================
+8.3s 20 
+8.3s 21 ==========================================================================================
+8.3s 22 BEGIN CELL 01 — AMBIENTE E PORTOES BARATOS
+8.3s 23 ==========================================================================================
+8.3s 24 Datasets anexados: ['datasets']
+9.7s 25 GPU 0: Tesla T4 (UUID: GPU-ec5f1f8d-dfbf-4143-cbb1-239d4627b51c)
+9.7s 26 Painel MD5 OK: 1dc132ed3e9fa79596495ebf30ab63f0
+9.7s 27 Fragment files: 762 | manifests: 2
+9.7s 28 Checkpoint: /kaggle/input/datasets/fredericoflores1807/caduceus-ph-vanilla
+9.7s 29 Instalando pysam …
+14.2s 30 Instalando py2bit …
+17.6s 31 Instalando torch==2.4.0 --index-url https://download.pytorch.org/whl/cu121 …
+150.2s 32 Instalando https://github.com/Dao-AILab/causal-conv1d/releases/download/v1.5.0.post8/causal_conv1d-1.5.0.post8+cu12torch2.4cxx11abiFALSE-cp312-cp312-linux_x86_64.whl …
+162.0s 33 Instalando https://github.com/state-spaces/mamba/releases/download/v2.2.4/mamba_ssm-2.2.4+cu12torch2.4cxx11abiFALSE-cp312-cp312-linux_x86_64.whl …
+186.3s 34 Instalando transformers==4.45.2 …
+207.5s 35 torch=2.4.0+cu121 | GPU=Tesla T4
+207.5s 36 ==========================================================================================
+207.5s 37 END CELL 01 — AMBIENTE E PORTOES BARATOS
+207.5s 38 ==========================================================================================
+207.5s 39 
+207.5s 40 ==========================================================================================
+207.5s 41 BEGIN CELL 02 — MANIFESTOS, MAPA PROMOTOR E REFERENCIAS
+207.5s 42 ==========================================================================================
+207.5s 43 Alinhamento manifesto-fragmento: 762/762
+208.3s 44 PLS no painel: 39,614 | união promotora-painel: 57,992,540 bp
+245.6s 45 Bins DELFI utilizáveis: painel=538 | promotor=566
+245.6s 46 Input fingerprint: a89c668e0797a7c8...
+245.6s 47 ==========================================================================================
+245.6s 48 END CELL 02 — MANIFESTOS, MAPA PROMOTOR E REFERENCIAS
+245.6s 49 ==========================================================================================
+245.6s 50 
+245.6s 51 ==========================================================================================
+245.6s 52 BEGIN CELL 03 — AUDITORIA PROMOTORA, ELEGIBILIDADE E DOBRAS
+245.6s 53 ==========================================================================================
+6749.5s 54 
+6749.5s 55 Retenção de amostras por tamanho de pool:
+6749.5s 56 estudo  pool  n_total  n_retained  retention
+6749.5s 57 cristiano2019_delfi_wgs  2000      537         537        1.0
+6749.5s 58 cristiano2019_delfi_wgs  5000      537         537        1.0
+6749.5s 59 cristiano2019_delfi_wgs 10000      537         537        1.0
+6749.5s 60 jiang2015_hcc_wgs  2000      225         225        1.0
+6749.5s 61 jiang2015_hcc_wgs  5000      225         225        1.0
+6749.5s 62 jiang2015_hcc_wgs 10000      225         225        1.0
+6749.5s 63 
+6749.5s 64 Elegíveis com pool=5000: 762/762
+6749.5s 65 ==========================================================================================
+6749.5s 66 END CELL 03 — AUDITORIA PROMOTORA, ELEGIBILIDADE E DOBRAS
+6749.5s 67 ==========================================================================================
+6749.5s 68 
+6749.5s 69 ==========================================================================================
+6749.5s 70 BEGIN CELL 04 — CARREGAR CADUCEUS E CONTROLE TECNICO
+6749.5s 71 ==========================================================================================
+6749.5s 72 Executando gate técnico resumido de validação...
+6749.5s 73 ==========================================================================================
+6749.5s 74 END CELL 04 — CARREGAR CADUCEUS E CONTROLE TECNICO
+6749.5s 75 ==========================================================================================
+6749.5s 76 
+6749.5s 77 ==========================================================================================
+6749.5s 78 BEGIN CELL 05 — RESERVOIR PROMOTOR, DELFI E EMBEDDINGS
+6749.5s 79 ==========================================================================================
+25822.1s 80 Extração multimodal completa gravada
+25822.1s 81 ==========================================================================================
+25822.1s 82 END CELL 05 — RESERVOIR PROMOTOR, DELFI E EMBEDDINGS
+25822.1s 83 ==========================================================================================
+25822.1s 84 
+25822.1s 85 ==========================================================================================
+25822.1s 86 BEGIN CELL 06 — GATED MIL E FUNCOES DE TREINO
+25822.1s 87 ==========================================================================================
+25822.1s 88 ==========================================================================================
+25822.1s 89 END CELL 06 — GATED MIL E FUNCOES DE TREINO
+25822.1s 90 ==========================================================================================
+25822.1s 91 
+25822.1s 92 ==========================================================================================
+25822.1s 93 BEGIN CELL 07 — DESENVOLVIMENTO E LOCK NO CRISTIANO
+25822.1s 94 ==========================================================================================
+25822.1s 95 /tmp/ipykernel_23/1585365264.py:1605: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at ../torch/csrc/utils/tensor_numpy.cpp:206.)
+25822.1s 96 torch.from_numpy(bag_histogram(int(idx))).to(DEVICE)
+25822.1s 97 
+25822.1s 98 /tmp/ipykernel_23/1585365264.py:1605: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at ../torch/csrc/utils/tensor_numpy.cpp:206.)
+25822.1s 99 torch.from_numpy(bag_histogram(int(idx))).to(DEVICE)
+27291.3s 100 
+27291.3s 101 AUROC OOF Cristiano:
+27291.3s 102 caduceus               0.7607
+27291.3s 103 kmer                   0.7166
+27291.3s 104 promoter_id            0.6343
+27291.3s 105 length_only            0.7494
+27291.3s 106 delfi_all              0.8102
+27291.3s 107 delfi_prom_all         0.7904
+27291.3s 108 delfi_prom_matched     0.6262
+29402.2s 109 Modelos treinados e congelados com sucesso.
+29402.2s 110 ==========================================================================================
+29402.2s 111 END CELL 07 — DESENVOLVIMENTO E LOCK NO CRISTIANO
+29402.2s 112 ==========================================================================================
+29402.2s 113 
+29402.2s 114 ==========================================================================================
+29402.2s 115 BEGIN CELL 08 — AVALIACAO EXTERNA BLOQUEADA NO JIANG
+29402.2s 116 ==========================================================================================
+29490.4s 117 
+29490.4s 118 AUROC:
+29490.4s 119 contrast                arm  n_pos  n_neg      auc
+29490.4s 120 HCC_vs_healthy           caduceus     90     32 0.679861
+29490.4s 121 HCC_vs_healthy               kmer     90     32 0.468403
+29490.4s 122 HCC_vs_healthy        promoter_id     90     32 0.385069
+29490.4s 123 HCC_vs_healthy        length_only     90     32 0.568403
+29490.4s 124 HCC_vs_healthy          delfi_all     90     32 0.875347
+29490.4s 125 HCC_vs_healthy     delfi_prom_all     90     32 0.880208
+29490.4s 126 HCC_vs_healthy delfi_prom_matched     90     32 0.532292
+29490.4s 127 HCC_vs_hepatitis_cirrhosis           caduceus     90    103 0.696872
+29490.4s 128 HCC_vs_hepatitis_cirrhosis               kmer     90    103 0.577994
+29490.4s 129 HCC_vs_hepatitis_cirrhosis        promoter_id     90    103 0.492988
+29490.4s 130 HCC_vs_hepatitis_cirrhosis        length_only     90    103 0.609709
+29490.4s 131 HCC_vs_hepatitis_cirrhosis          delfi_all     90    103 0.803020
+29490.4s 132 HCC_vs_hepatitis_cirrhosis     delfi_prom_all     90    103 0.803344
+29490.4s 133 HCC_vs_hepatitis_cirrhosis delfi_prom_matched     90    103 0.593635
+29490.4s 134 
+29490.4s 135 Comparações primárias:
+29490.4s 136 auc_a    auc_b     delta       se    ci_low   ci_high         z  p_two_sided       contrast    arm_a              arm_b  n_pos  n_neg  bootstrap_ci_low  bootstrap_ci_high primary_decision
+29490.4s 137 0.679861 0.875347 -0.195486 0.057758 -0.308691 -0.082281 -3.384595 7.128340e-04 HCC_vs_healthy caduceus          delfi_all     90     32         -0.311120          -0.082257            FUTIL
+29490.4s 138 0.679861 0.880208 -0.200347 0.057042 -0.312149 -0.088545 -3.512284 4.442729e-04 HCC_vs_healthy caduceus     delfi_prom_all     90     32         -0.308707          -0.093733            FUTIL
+29490.4s 139 0.679861 0.532292  0.147569 0.068170  0.013955  0.281183  2.164714 3.040960e-02 HCC_vs_healthy caduceus delfi_prom_matched     90     32          0.016641           0.286476            FUTIL
+29490.4s 140 0.679861 0.468403  0.211458 0.041821  0.129488  0.293428  5.056225 4.276377e-07 HCC_vs_healthy caduceus               kmer     90     32          0.131241           0.294097            FUTIL
+29490.4s 141 0.679861 0.385069  0.294792 0.070258  0.157086  0.432498  4.195837 2.718658e-05 HCC_vs_healthy caduceus        promoter_id     90     32          0.164219           0.427127            FUTIL
+29490.4s 142 0.679861 0.568403  0.111458 0.073087 -0.031792  0.254708  1.525014 1.272556e-01 HCC_vs_healthy caduceus        length_only     90     32         -0.027439           0.252101            FUTIL
+29490.4s 143 
+29490.4s 144 DECISÃO: FUTIL
+29490.4s 145 ==========================================================================================
+29490.4s 146 END CELL 08 — AVALIACAO EXTERNA BLOQUEADA NO JIANG
+29490.4s 147 ==========================================================================================
+29490.4s 148 
+29490.4s 149 ==========================================================================================
+29490.4s 150 BEGIN CELL 09 — SENSIBILIDADES POS-LOCK
+29490.4s 151 ==========================================================================================
+29490.4s 152 Sensibilidades pós-lock desativadas.
+29490.4s 153 ==========================================================================================
+29490.4s 154 END CELL 09 — SENSIBILIDADES POS-LOCK
+29490.4s 155 ==========================================================================================
+29490.4s 156 
+29490.4s 157 ==========================================================================================
+29490.4s 158 BEGIN CELL 10 — MANIFESTO FINAL E PERSISTENCIA
+29490.4s 159 ==========================================================================================
+29490.4s 160 EXECUÇÃO CONCLUIDA
+29490.4s 161 Resultados : /kaggle/working/caduceus_promoter_mil_v3/04_results
+29490.4s 162 Manifesto  : /kaggle/working/caduceus_promoter_mil_v3/run_manifest.json
+29490.4s 163 ==========================================================================================
+29490.4s 164 END CELL 10 — MANIFESTO FINAL E PERSISTENCIA
+29490.4s 165 ==========================================================================================
+29495.9s 166 /usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+29495.9s 167 cells[i][c] = re.sub('\\\\\|', '|', cell)
+29496.1s 168 /usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+29496.1s 169 text = re.sub(r'_', '\_', text) # Escape underscores in display text
+29496.7s 170 [NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+29497.0s 171 [NbConvertApp] Writing 143966 bytes to __notebook__.ipynb
+29499.4s 172 [NbConvertApp] Converting notebook __notebook__.ipynb to html
+29500.5s 173 [NbConvertApp] Writing 703697 bytes to __results__.html
