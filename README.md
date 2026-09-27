@@ -1,6 +1,118 @@
-# FragmentomicsBenchmark
+# Auditoria Metodológica de Modelos de Fundação Genômica e Attention-MIL em Fragmentômica de cfDNA
 
-Auditoria metodológica sobre o uso de modelos de fundação genômica e redes *Attention-MIL* na análise de fragmentos de DNA livre circulante (cfDNA) para detecção de câncer. O projeto avalia a contribuição isolada de cada decisão de engenharia por meio de validação cruzada independente (5 sementes $\times$ 5 partições = 25 repetições).
+## 1. Visão Geral e Hipótese Científica
+A fragmentômica de DNA livre circulante (*cfDNA*) explora assinaturas físicas de fragmentação geradas pela clivagem enzimática da cromatina para detectar neoplasias precoces. Em fases iniciais da doença, a fração de DNA tumoral circulante (*ctDNA*) representa rotineiramente menos de 1% do total de moléculas plasmáticas, situando a tarefa em um **regime de sinal ultrabaixo**.
+
+Nesse estudo avaliamos uma arquitetura de **Modelo de Fundação Genômica** (codificadores de sequência em nível de nucleotídeo) e rede de **Aprendizado por Múltiplas Instâncias com Atenção (*Attention-MIL*)** para diagnosticar câncer diretamente de sequências de fragmentos. Essa abordagem apoia-se em três premissas mecanicistas centrais:
+1. **Semântica Biológica Autônoma:** O codificador latente retém assinaturas biológicas ricas e posicionais em cada molécula isolada.
+2. **Priorização Seletiva:** O mecanismo de atenção atua como um filtro informático que prioriza os raros fragmentos tumorais em meio ao ruído não neoplásico.
+3. **Imunidade a Vieses Demográficos:** A restrição das entradas a coordenadas genômicas (arquivos BED), sem armazenamento de genótipo direto do paciente, blindaria a rede contra estruturas de ancestralidade populacional.
+
+O desenho metodológico desmembra a transição entre um classificador linear elementar e redes neurais profundas com atenção, medindo o impacto isolado de cada decisão de modelagem, avaliando o conteúdo latente dos codificadores e testando a estabilidade da inferência sob transferência interpopulacional.
+
+---
+
+## 2. Desenho Amostral e Pré-processamento Físico
+
+O desenho amostral utiliza 762 amostras de sequenciamento genômico total de baixa cobertura (*low-pass WGS*) derivadas do repositório público FinaleDB, padronizadas sobre o genoma de referência $\text{hg38}$:
+
+| Coorte | Estudo Primário | População | N | Perfil Clínico e Papel Experimental |
+| :--- | :--- | :--- | :---: | :--- |
+| **Desenvolvimento** | Baltimore (Cristiano et al., 2019) | Ocidental | 537 | 276 casos pan-câncer (8 tipos tumorais; sem HCC) vs. 261 controles saudáveis. Validação cruzada de 5 partições $\times$ 5 sementes. |
+| **Externa (Exploratória)** | Hong Kong (Jiang et al., 2015) | Asiática | 225 | 90 carcinomas hepatocelulares (HCC) vs. 32 controles saudáveis para AUROC; 67 hepatites B e 36 cirroses para inspeção de especificidade clínica. |
+
+```
+                                  PIPELINE FÍSICO E RECORTE
+                                  
+ Arquivos WGS Brutos (FinaleDB) ──> recorta_painel.sh v2.0 ──> Amostragem por Reservatório ──> Bolsas Fixas
+ (~280 GB, alinhamentos hg38)         • 39.614 promotores PLS      (5.000 fragmentos/paciente)    (N, 5000, Dim)
+                                      • Flanco: ±2 kb               • Sem padding artificial      • Caduceus (256d)
+                                      • Merge dist: 500 pb          • Semente por amostra         • 4-mers (256d)
+                                      • Subtração ENCODE Blacklist                                • DELFI 5 Mb (1.614d)
+```
+
+### Protocolo de Curadoria e Invariantes (`scripts/recorta_painel.sh`)
+1. **Painel Promotor Curado:** Fatiamento do genoma ao redor de 39.614 regiões promotoras canônicas (sítios PLS autossômicos), expandidas para $\pm 2\text{ kb}$ em torno do centro de cada promotor.
+2. **Invariante de Distância Pós-Subtração:** A remoção de regiões de exclusão (*ENCODE Blacklist*) pode fragmentar intervalos em subseções contíguas estreitas. O script aplica uma fusão com folga mínima de 500 pb (`MERGE_DIST=500`) para evitar que moléculas de até 300 pb interceptem duas janelas vizinhas e sejam emitidas em duplicidade pelo utilitário `tabix -R`.
+3. **Amostragem por Reservatório Uniforme:** Cada paciente é convertido em uma bolsa uniforme de exatamente 5.000 fragmentos reais com ponto médio no intervalo de $\pm 1\text{ kb}$ de promotores. Fragmentos artificiais de preenchimento (*zero-padding*) foram estritamente proibidos para impedir distorções numéricas em médias e atenções.
+4. **Redução de Volume:** O volume físico de dados brutos foi reduzido de $\sim 280\text{ GB}$ para $\sim 12\text{ GB}$, mantendo conformidade com as contagens descritas no FinaleDB.
+
+---
+
+## 3. Representações Genômicas Avaliadas (jupyter_notebook/gerarador_de_embedings.ipynb)
+
+Para cada paciente, o conjunto de dados extrai representações em três níveis físicos distintos de resolução:
+
+1. **Codificador Genômico — Caduceus-Ph (256d, Resolução de Base):** Vetor denso obtido pela camada final de um modelo bidirecional equivariante a reverso-complemento, lido em janelas medianas de 178 pb centradas no fragmento com margem de $\pm 6\text{ pb}$. A representação da molécula é a média posicional interna da camada latente.
+2. **Composição de 4-mers (256d, Resolução de Base):** Frequência observada de todos os 256 possíveis tetranucleotídeos ao longo da mesma janela física lida pelo modelo de fundação.
+3. **Comprimento Físico (1d, Nível da Molécula):** Tamanho da molécula em pares de bases extraído das extremidades de clivagem.
+4. **Cobertura DELFI Macroscópica (1.614d, Nível de Megabase):** Contagens de fragmentos curtos (100–150 pb) e longos (151–220 pb) agregadas em janelas autossômicas de 5 Mb ao longo de todo o genoma (WGS completo), corrigidas para viés de conteúdo GC.
+5. **Perfis de Terminação Fina — End-Motifs (256d, Nível Enzimático):** Frequências dos 256 tetranucleotídeos nos pontos exatos de clivagem 5' de montante e de jusante (reverso-complementado) extraídos da referência $\text{hg38}$.
+
+---
+
+## 4. O Estudo de Ablação Incremental (Cascata de 6 Etapas) (jupyter_notebooks/bechmarchs.ipynb)
+
+Para isolar a causa exata de perdas ou ganhos de desempenho sem recorrer a comparações em "caixa-preta", o fluxo desmembra o espaço entre uma regressão logística elementar e uma rede *Attention-MIL* completa em seis etapas atômicas sucessivas:
+
+$$\text{Identidade Telescópica:} \quad \sum_{i=1}^{6} \Delta\text{AUROC}_i = \text{AUROC}_{\text{Attention-MIL}} - \text{AUROC}_{\text{Logística Base}}$$
+
+```
+                                  ESTUDO DE ABLAÇÃO INCREMENTAL
+                                  
+  [Cad: Média → Logística]  (0.830)
+             │
+             ├── 1. COMPRIMENTO (+0.005) ──> Adiciona canal de tamanho molecular
+             ├── 2. NORMALIZAÇÃO (-0.059) ──> Padronização fragmento a fragmento
+             ├── 3. CABEÇA (+0.079) ────────> Regressão Linear -> Rede Multicamada (MLP)
+             ├── 4. PROJEÇÃO (+0.003) ──────> Camada linear + ReLU DEPOIS da média
+             ├── 5. ORDEM (-0.156) ─────────> Camada linear + ReLU ANTES da média (COLAPSO)
+             └── 6. AGREGADOR (+0.024) ─────> Média aritmética -> Atenção aprendida
+             │
+  [Caduceus Attention-MIL]  (0.725)
+```
+
+### O Mecanismo Algébrico da Etapa ORDEM
+Como qualquer camada afim comuta algebricamente com a média aritmética:
+
+$$\text{Linear}(\text{média}(x)) = W \cdot \text{média}(x) + b = \text{média}(W \cdot x + b) = \text{média}(\text{Linear}(x))$$
+
+A identidade foi verificada computacionalmente com erro numérico residual máximo de $2{,}98 \times 10^{-8}$, provando que as variantes da etapa ORDEM diferem **exclusivamente na posição relativa da função de ativação não linear (ReLU)**.
+
+No regime de sinal fraco, cada fragmento isolado exibe separabilidade insignificante ($d = 0{,}0104$) dominada por ruído estocástico simétrico em torno de zero. A média de 5.000 instâncias cancela essas oscilações simétricas e eleva a separação para $d = 0{,}2031$. Ao aplicar a ReLU nos fragmentos antes da média, os valores negativos são truncados a zero, quebrando a simetria do ruído estocástico e impedindo que a agregação aritmética subsequente cancele a variação aleatória.
+
+---
+
+## 5. Protocolo Experimental e Estimadores Estatísticos
+
+O protocolo incorpora mecanismos de auditoria estrita para mitigar vazamento de dados e instabilidade estocástica:
+
+* **Replicação Independente Quíntupla:** Todo o pipeline é executado em 5 sementes pseudoaleatórias (`1807`, `2024`, `3141`, `5926`, `8979`), variando simultaneamente as partições de dados e a inicialização dos parâmetros (totalizando 25 execuções por braço).
+* **Estimadores Estatísticos Duais:**
+  1. *Média das Diferenças por Dobra:* Mede a dispersão associada a inicializações e partições com a amostra de pacientes fixa.
+  2. *Bootstrap Pareado de Escores Agrupados:* 2.000 reamostragens dos pacientes sobre as probabilidades agregadas das cinco réplicas, medindo a incerteza amostral com os modelos fixos.
+* **Reconstrução Fora-da-Dobra (*RidgeCV*):** A avaliação do conteúdo informacional do codificador genômico utiliza regressão Ridge com validação cruzada aninhada, reconstruindo o vetor latente do *Caduceus* a partir de 4-mers e ocupação de promotores.
+* **Distribuição Nula Empírica:** Limiares nulos calculados via 200 permutações de rótulos preservando a estrutura exata de 5 sementes $\times$ 5 dobras.
+* **Regra de Decisão Pré-Fixada (*Gate de Futilidade*):** O limiar de relevância mínima foi estipulado a priori em $\Delta^* = 0{,}03$ de AUROC. Modelos cujo limite superior do intervalo de confiança não superam $\Delta^*$ recebem o veredito determinístico de `FUTIL`.
+
+---
+
+## 6. Principais Resultados Empíricos
+
+```
+                              COMPARAÇÃO CHAVE DE GENERALIZAÇÃO
+                              
+                Baltimore (Treino: Pan-Câncer)         Hong Kong (Avaliação Externa: HCC)
+DELFI 5 Mb:     AUROC = 0.819                   ──>    AUROC = 0.863  (Ganho: +0.043)
+Caduceus MIL:   AUROC = 0.857                   ──>    AUROC = 0.498  (Colapso: -0.359)
+```
+
+1. **Ablação e Colapso da Não Linearidade Precoce:** A etapa ORDEM foi responsável pela perda de $-0{,}156$ de AUROC (negativo em 25 de 25 comparações), reduziu a estabilidade de ordenamento de pacientes entre réplicas de 0,925 para 0,195 e concentrou 16 de 17 falhas de treinamento.
+2. **Redundância do Modelo de Fundação ($R^2 = 0{,}990$):** O vetor denso do *Caduceus* é 99% reconstruível a partir de contagens elementares de 4-mers. Embora o resíduo retenha sinal residual modesto (AUROC 0,604, $p = 0{,}0050$), o ganho frente à contagem de 4-mers pura foi de apenas $+0{,}098$.
+3. **Dispersão do Mecanismo de Atenção:** O *Attention-MIL* atribuiu pesos homogêneos a 95,6% das instâncias da bolsa (número efetivo de 4.781,9 de 5.000 fragmentos), falhando na tarefa de isolar moléculas tumorais raras.
+4. **Vulnerabilidade Populacional e Transferência Externa:** Redes profundas que operam na resolução de base única colapsaram para o nível do acaso na coorte de Hong Kong (AUROC 0,498 no modelo de fundação e 0,367 com *Attention-MIL*). Duas componentes principais da representação latente separam pacientes saudáveis das duas origens geográficas com AUROC de 0,990, evidenciando retenção de viés técnico e de ancestralidade. Em contraste, a cobertura macroscópica em 5 Mb do DELFI generalizou com robustez (AUROC 0,863).
+5. **Diagnóstico Amostral de End-Motifs:** A recuperação de 10.000 pontos de corte por paciente revelou enriquecimento biológico de motivos iniciados em CC (20,3% vs. 6,2% aleatório, refletindo a clivagem por DNASE1L3). Contudo, o teste de confiabilidade por divisão ao meio (*split-half*) indicou correlação de apenas 0,132 entre metades de 2.500 fragmentos (confiabilidade projetada de 0,233 para a bolsa total), comprovando que 5.000 fragmentos são amostralmente insuficientes para calibrar perfis de 256 categorias no nível do indivíduo.
+
 
 ---
 
