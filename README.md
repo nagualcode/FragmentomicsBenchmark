@@ -363,9 +363,3 @@ Esta tabela apresenta a AUROC média obtida nas 5 dobras para cada uma das semen
 
 ---
 
-## 3. Reprodutibilidade e Manifesto Criptográfico
-
-A integridade do fluxo analítico é verificada pelo arquivo `procedencia.json`, que registra os seguintes parâmetros de execução:
-* **Assinatura SHA-256 dos dados brutos de entrada:** `897ce5eae3e362d8`
-* **Ambiente computacional:** Kaggle, GPU NVIDIA Tesla T4 (tensores residentes em 3,83 GB de VRAM)
-* **Tempo total de processamento:** 30,2 minutos
