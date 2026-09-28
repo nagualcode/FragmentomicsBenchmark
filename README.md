@@ -37,9 +37,16 @@ O desenho amostral utiliza 762 amostras de sequenciamento genômico total de bai
 3. **Amostragem por Reservatório Uniforme:** Cada paciente é convertido em uma bolsa uniforme de exatamente 5.000 fragmentos reais com ponto médio no intervalo de $\pm 1\text{ kb}$ de promotores. Fragmentos artificiais de preenchimento (*zero-padding*) foram estritamente proibidos para impedir distorções numéricas em médias e atenções.
 4. **Redução de Volume:** O volume físico de dados brutos foi reduzido de $\sim 280\text{ GB}$ para $\sim 12\text{ GB}$, mantendo conformidade com as contagens descritas no FinaleDB.
 
+   Datasets gerados:
+   https://www.kaggle.com/datasets/fredericoflores1807/cfdna-cristiano2019-delfi
+   e
+   https://www.kaggle.com/datasets/fredericoflores1807/cfdna-jiang2015-hcc
+
 ---
 
 ## 3. Representações Genômicas Avaliadas (jupyter_notebook/gerarador_de_embedings.ipynb)
+https://www.kaggle.com/code/fredericoflores/cfdna-gerar-embeding-p-benchmark-artigo
+
 
 Para cada paciente, o conjunto de dados extrai representações em três níveis físicos distintos de resolução:
 
@@ -49,9 +56,12 @@ Para cada paciente, o conjunto de dados extrai representações em três níveis
 4. **Cobertura DELFI Macroscópica (1.614d, Nível de Megabase):** Contagens de fragmentos curtos (100–150 pb) e longos (151–220 pb) agregadas em janelas autossômicas de 5 Mb ao longo de todo o genoma (WGS completo), corrigidas para viés de conteúdo GC.
 5. **Perfis de Terminação Fina — End-Motifs (256d, Nível Enzimático):** Frequências dos 256 tetranucleotídeos nos pontos exatos de clivagem 5' de montante e de jusante (reverso-complementado) extraídos da referência $\text{hg38}$.
 
+   Output: https://www.kaggle.com/datasets/fredericoflores1807/cfdna-promoter-multimodal-resume-v3
+
 ---
 
 ## 4. O Estudo de Ablação Incremental (Cascata de 6 Etapas) (jupyter_notebooks/bechmarchs.ipynb)
+https://www.kaggle.com/code/fredericoflores/cfdna-benchmark-artigo
 
 Para isolar a causa exata de perdas ou ganhos de desempenho sem recorrer a comparações em "caixa-preta", o fluxo desmembra o espaço entre uma regressão logística elementar e uma rede *Attention-MIL* completa em seis etapas atômicas sucessivas:
 
