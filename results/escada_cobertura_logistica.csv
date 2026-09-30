@@ -1,0 +1,3 @@
+origem,destino,etiqueta,descricao,delta,dp_sementes,boot_delta,boot_inf,boot_sup,neg,n_comp,n_ok,delta_ok,neg_ok,delta_falha,neg_falha
+rep_delfi,rep_delfi_prom_all,REGIÃO,restringe as janelas às regiões promotoras,0.0011984572031741303,0.0046963877924455265,-0.0005048589272631495,-0.01205338699826384,0.011046272047158934,13,25,25,0.0011984572031742014,13,,0
+rep_delfi_prom_all,rep_delfi_prom_matched,PROFUNDIDADE,restringe aos mesmos 5.000 fragmentos da bolsa,-0.19096022373852561,0.03037478389318883,-0.19353423631799718,-0.24869329381351152,-0.14186329588014984,25,25,25,-0.19096022373852567,25,,0

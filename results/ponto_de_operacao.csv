@@ -1,0 +1,22 @@
+Braco,Especificidade,Sensibilidade
+"Cobertura DELFI-like, painel inteiro (MLP)",1.0,0.6111111111111112
+"Cobertura DELFI-like, promotora, todos os fragmentos (MLP)",1.0,0.5888888888888889
+"Cobertura DELFI-like, painel inteiro (Logística)",1.0,0.35555555555555557
+"Cobertura DELFI-like, promotora, todos os fragmentos (Logística)",1.0,0.3333333333333333
+Perfil de End-Motif (Logística),0.8125,0.14444444444444443
+Histograma de Comprimentos (Logística),0.96875,0.1
+Caduceus + Comprimento (Média → Projeção → MLP),1.0,0.05555555555555555
+Caduceus + Comprimento (Projeção → Atenção MIL),1.0,0.05555555555555555
+Somente Comprimento (Atenção MIL) [canal único],1.0,0.05555555555555555
+Caduceus + Comprimento (Média → MLP),1.0,0.044444444444444446
+Caduceus + Comprimento (Projeção → Média → MLP),1.0,0.044444444444444446
+Caduceus + Comprimento (Média → Logística),1.0,0.044444444444444446
+Caduceus (Média → Logística),1.0,0.03333333333333333
+4-mers + Comprimento (Média → Projeção → MLP),1.0,0.03333333333333333
+"Caduceus + Comprimento (Média → Logística, escala de fragmento)",1.0,0.03333333333333333
+"Cobertura DELFI-like, promotora, os mesmos 5.000 (Logística)",1.0,0.03333333333333333
+4-mers + Comprimento (Projeção → Atenção MIL),1.0,0.03333333333333333
+4-mers + Comprimento (Projeção → Média → MLP),1.0,0.03333333333333333
+"Cobertura DELFI-like, promotora, os mesmos 5.000 (MLP)",1.0,0.022222222222222223
+Caduceus — Resíduo após 4-mers e Ocupação (Logística),1.0,0.011111111111111112
+Composição de 4-mers (Média → Logística),1.0,0.0

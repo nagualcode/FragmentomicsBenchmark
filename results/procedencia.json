@@ -1,14 +1,17 @@
 {
-  "assinatura_configuracao": "404e0e2f7ea254e9",
-  "assinatura_codigo": "886c52e378d78dac",
-  "assinatura_dados": "897ce5eae3e362d8",
+  "assinatura_configuracao": "6cc8b31519897578",
+  "assinatura_codigo": "02880b273530edc8",
+  "assinatura_dados": "434cc0b1f275fc0b",
   "arquivos": {
     "metadata.csv": "f5532baebd0e0c8feb42d7d2c14e497bdb0bd85101b71c0af1c4ec3134dc4479",
     "caduceus_embeddings.npy": "7bb5ff4531180a9a71d3e92fc686d106e8cf7826d83bebb524eb61dd77b26c77",
     "delfi_all.npy": "205e99a226def682befdcc9c7bec936440c1f5930c84a69b607ee1cd7f2946ef",
+    "delfi_promoter_all.npy": "2758a5fe43b36391da4c5f2b3f260415e3423a4cb6a5b7ec5add061d424d4e9f",
+    "delfi_promoter_matched.npy": "aaaf821d4bbf5b84beeae338eeed900be7b2d8e003e01e52d11143ccb37775c5",
     "kmer_features.npy": "5b4a985d6e7d095ebf1b7d3b8126d5fb094acaceb23d680fa239aeb92e2161b3",
     "promoter_fragment_lengths.npy": "142d0b45f1bfd1ffaf738d4eea4e801a8d082c6613125469875191e40fa88f36",
-    "promoter_ids.npy": "e11f3b45d9de9420e2cd7e0fd7dd47d13ba989f8992d6e4ce56e056e56fe2674"
+    "promoter_ids.npy": "e11f3b45d9de9420e2cd7e0fd7dd47d13ba989f8992d6e4ce56e056e56fe2674",
+    "promoter_fragment_coordinates.npy": "309d0c1212ef0344bba944844c934a1912efd17b7eec45f9fe49fd752b3de451"
   },
   "configuracao": {
     "SEMENTES": "(1807, 2024, 3141, 5926, 8979)",
@@ -42,6 +45,10 @@
     "N_PACIENTES_FINITUDE": "30",
     "N_PACIENTES_POR_CLASSE_D": "60",
     "JANELA_EXTRA_ENCODER": "12.0",
+    "MOTIF_AMBOS_EXTREMOS": "True",
+    "MOTIF_TESTE_METADES": "True",
+    "MOTIF_METAS": "(0.7, 0.8, 0.9)",
+    "RETENCAO_MINIMA": "0.9",
     "VERIFICACOES_EXTRA": "False"
   },
   "mapa_condicao": {
@@ -66,16 +73,20 @@
   "n_pacientes": 762,
   "n_desenvolvimento": 537,
   "n_externo": 225,
-  "n_bracos": 16,
+  "n_bracos": 21,
+  "n_bracos_neurais": 11,
   "gate_padding": 0,
   "gate_vetor_identico": {
     "caduceus": 2.7902424335479736e-06,
     "kmers": 3.7997961044311523e-07
   },
   "gate_comutacao_linear_media": 2.9802322387695312e-08,
-  "gate_canal_nulo": 0.9257417917251587,
-  "gate_telescopio": 1.3877787807814457e-17,
-  "gate_finitude": "completa: DELFI, comprimentos; triagem: Caduceus, 4-mers",
+  "gate_canal_unico": 0.9257417917251587,
+  "gate_telescopio_principal": 1.3877787807814457e-17,
+  "gate_telescopio_cobertura_rede": 0.0,
+  "gate_telescopio_cobertura_logistica": 0.0,
+  "gate_finitude": "completa: coberturas, comprimentos; triagem: Caduceus, 4-mers",
+  "gate_coberturas_distintas": 0.9784955978393555,
   "fracao_fora_histograma": 0.0,
   "esparsidade_ocupacao": 0.883695807587842,
   "crossover_variancia": 674.7622680664062,
@@ -109,12 +120,17 @@
     0.14265620473013027
   ],
   "limiar_parada": 0.6,
-  "inflacao_pico_bruto_sobre_suave": 0.014127384960718315,
-  "execucoes_abaixo_do_limiar": 17,
+  "inflacao_pico_bruto_sobre_suave": 0.0121441689623508,
+  "execucoes_abaixo_do_limiar": 27,
+  "execucoes_totais": 275,
+  "falhas_por_lado_do_degrau_ordem": {
+    "projeta fragmento a fragmento": 27,
+    "agrega antes da não linearidade": 0
+  },
   "comparacoes_afetadas_pelo_limiar": 12,
   "taxa_maxima_recorte": 0.027147401908801695,
   "avisos_convergencia": 0,
-  "degraus": {
+  "escada_principal": {
     "COMPRIMENTO": {
       "delta_por_dobra": 0.0046015022713135735,
       "dp_sementes": 0.0016592829015270461,
@@ -141,7 +157,7 @@
       "delta_atingiram": -0.05948023674438769,
       "n_atingiram": 25
     },
-    "CABEÇA": {
+    "CLASSIFICADOR": {
       "delta_por_dobra": 0.07946381919966825,
       "dp_sementes": 0.007224995381539693,
       "delta_escore_agrupado": 0.08126971856666315,
@@ -194,6 +210,80 @@
       "n_atingiram": 19
     }
   },
+  "escada_cobertura_rede": {
+    "REGIÃO": {
+      "delta_por_dobra": -0.005925239854485165,
+      "dp_sementes": 0.010912587670335257,
+      "delta_escore_agrupado": -0.0021397107783995236,
+      "ic95_bootstrap": [
+        -0.0164225640310929,
+        0.012606104681396776
+      ],
+      "negativos": 14,
+      "de": 25
+    },
+    "PROFUNDIDADE": {
+      "delta_por_dobra": -0.2148749505211769,
+      "dp_sementes": 0.028510063256605694,
+      "delta_escore_agrupado": -0.19857534573816862,
+      "ic95_bootstrap": [
+        -0.25063223194889206,
+        -0.147828195650549
+      ],
+      "negativos": 25,
+      "de": 25
+    }
+  },
+  "escada_cobertura_logistica": {
+    "REGIÃO": {
+      "delta_por_dobra": 0.0011984572031741303,
+      "dp_sementes": 0.0046963877924455265,
+      "delta_escore_agrupado": -0.0005048589272631495,
+      "ic95_bootstrap": [
+        -0.01205338699826384,
+        0.011046272047158934
+      ],
+      "negativos": 13,
+      "de": 25
+    },
+    "PROFUNDIDADE": {
+      "delta_por_dobra": -0.19096022373852561,
+      "dp_sementes": 0.03037478389318883,
+      "delta_escore_agrupado": -0.19353423631799718,
+      "ic95_bootstrap": [
+        -0.24869329381351152,
+        -0.14186329588014984
+      ],
+      "negativos": 25,
+      "de": 25
+    }
+  },
+  "escada_cobertura_externa": [
+    {
+      "familia": "rede",
+      "etiqueta": "REGIÃO",
+      "delta_interna": -0.00592523985448512,
+      "delta_externa": 0.012500000000000067
+    },
+    {
+      "familia": "rede",
+      "etiqueta": "PROFUNDIDADE",
+      "delta_interna": -0.214874950521177,
+      "delta_externa": -0.32986111111111105
+    },
+    {
+      "familia": "logística",
+      "etiqueta": "REGIÃO",
+      "delta_interna": 0.0011984572031741303,
+      "delta_externa": 0.01736111111111116
+    },
+    {
+      "familia": "logística",
+      "etiqueta": "PROFUNDIDADE",
+      "delta_interna": -0.19096022373852561,
+      "delta_externa": -0.2913194444444446
+    }
+  ],
   "replicacao": {
     "ORDEM": {
       "caduceus": -0.1560512883343072,
@@ -217,7 +307,10 @@
     "Caduceus + Comprimento (Média → Logística)": 0.9372544067682602,
     "Composição de 4-mers (Média → Logística)": 0.7392776904867367,
     "Histograma de Comprimentos (Logística)": 0.9347845722892256,
-    "Cobertura DELFI 5 Mb (Logística)": 0.8159181364104894,
+    "Cobertura DELFI-like, painel inteiro (Logística)": 0.8159181364104894,
+    "Cobertura DELFI-like, promotora, todos os fragmentos (Logística)": 0.811897637437346,
+    "Cobertura DELFI-like, promotora, os mesmos 5.000 (Logística)": 0.6581500376458758,
+    "Perfil de End-Motif (Logística)": 0.792346969173216,
     "Caduceus + Comprimento (Média → Logística, escala de fragmento)": 0.9723043600092618,
     "Caduceus + Comprimento (Projeção → Atenção MIL)": 0.17825832589555698,
     "Caduceus + Comprimento (Projeção → Média → MLP)": 0.19487114567962668,
@@ -226,11 +319,79 @@
     "4-mers + Comprimento (Projeção → Atenção MIL)": 0.19690940688373523,
     "4-mers + Comprimento (Projeção → Média → MLP)": 0.24373777230124688,
     "4-mers + Comprimento (Média → Projeção → MLP)": 0.8384626786253266,
-    "Somente Comprimento (Atenção MIL) [controle nulo]": 0.6149034515678655,
-    "Cobertura DELFI 5 Mb (MLP)": 0.7898937045508905,
+    "Somente Comprimento (Atenção MIL) [canal único]": 0.6149034515678655,
+    "Cobertura DELFI-like, painel inteiro (MLP)": 0.7898937045508905,
+    "Cobertura DELFI-like, promotora, todos os fragmentos (MLP)": 0.7667131904034694,
+    "Cobertura DELFI-like, promotora, os mesmos 5.000 (MLP)": 0.4665396977233002,
     "Caduceus — Resíduo após 4-mers e Ocupação (Logística)": 0.658182514769303
+  },
+  "concordancia_antes_depois_ordem": {
+    "Caduceus": {
+      "antes": 0.9247262421046724,
+      "depois": 0.19487114567962668
+    },
+    "4-mers": {
+      "antes": 0.8384626786253266,
+      "depois": 0.24373777230124688
+    }
+  },
+  "end_motif": {
+    "protocolo_de_origem": "d7761ac06840461a14cd9fac5690ca9094a72c8d5cc97a09181660b9e3a74982",
+    "ambos_extremos": true,
+    "cortes_minimo": 9999,
+    "cortes_mediana": 10000,
+    "cortes_esperados": 10000,
+    "perda_maxima_por_borda": 9.999999999998899e-05,
+    "cortes_por_motivo": 39.0625,
+    "confiabilidade_metades": 0.13199663320344707,
+    "confiabilidade_bolsa_inteira": 0.23321029291387319,
+    "fracao_motivos_CC": 0.20274178683757782,
+    "enriquecimento_CC": 3.243868589401245,
+    "motivos_mais_frequentes": [
+      "CCCA",
+      "CCTG",
+      "CCAG",
+      "CCCT",
+      "CCCC",
+      "CCTC",
+      "CCTT",
+      "CCAA",
+      "CCCG",
+      "CCAC"
+    ],
+    "diversidade_mediana": 0.9408752918243408,
+    "projecoes_de_profundidade": [
+      {
+        "meta": 0.7,
+        "fragmentos": 38359.71304795115,
+        "alcancam": 761.0,
+        "retencao": 0.9986876640419947
+      },
+      {
+        "meta": 0.8,
+        "fragmentos": 65759.508082202,
+        "alcancam": 761.0,
+        "retencao": 0.9986876640419947
+      },
+      {
+        "meta": 0.9,
+        "fragmentos": 147958.8931849545,
+        "alcancam": 761.0,
+        "retencao": 0.9986876640419947
+      }
+    ],
+    "teto_de_profundidade": {
+      "bolsa_maxima_com_retencao": 389379.7,
+      "confiabilidade_nessa_bolsa": 0.9594896896269791,
+      "mediana_n_promoter": 562793.5,
+      "mediana_n_all": 576926.0
+    }
+  },
+  "densidade_de_contagem": {
+    "Cobertura promotora, os mesmos 5.000": 8.8339222614841,
+    "Ocupação de promotores": 0.1262180037360529
   },
   "dimensao_figura4": 17,
   "verificacoes_extra": false,
-  "tempo_total_segundos": 1813.1
+  "tempo_total_segundos": 2104.8
 }
