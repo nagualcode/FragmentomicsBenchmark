@@ -471,3 +471,5 @@ A revisão de literatura, a estruturação metodológica, a implementação do c
 e a redação foram conduzidas com auxílio dos sistemas Paperclip GXL e Gemini. O
 desenho experimental, a definição dos controles de integridade, a interpretação
 dos resultados e a revisão final são de responsabilidade do autor.
+
+<video src="explainer_pt.mp4" controls width="100%" poster=""></video>
